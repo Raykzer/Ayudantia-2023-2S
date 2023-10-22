@@ -64,6 +64,19 @@ docker exec -it producer_kafka3 bash
 Aquí deben de aplicar en cada uno de ellos el siguiente comando:\
 Para el producer dentro del primer contenedor:
 ```sh
+
+kafka-topics.sh --alter --bootstrap-server kafka:9092 --partitions 2 --topic formulario
+
+python3 cdb.py
+
+python3 pdb.py 1 venta
+
+python prodt.py 1 formulario
+
+python prodt.py 5 inventario
+
+python3 const.py 
+
 python3 producers3.py 4 temperatura
 ```
 Para el producer dentro del segundo contenedor:

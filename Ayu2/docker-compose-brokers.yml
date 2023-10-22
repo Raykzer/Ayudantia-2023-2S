@@ -10,6 +10,7 @@ services:
       - "2181:2181"
       - "2888:2888"
       - "3888:3888"
+
   kafka:
     image: "bitnami/kafka:latest"
     container_name: kafka
@@ -21,7 +22,7 @@ services:
       - ALLOW_PLAINTEXT_LISTENER=yes
     depends_on:
       - zookeeper
-  
+
   producer:
     build: ./producers
     container_name: producer_kafka
@@ -30,6 +31,7 @@ services:
       - zookeeper
     volumes:
       - ./producers:/usr/src/app
+      - /workspaces/Ayudantia-2023-2S/Ayu2/db:/usr/src/app/db  # Add this line to mount the database
 
   producer2:
     build: ./producers
@@ -39,6 +41,7 @@ services:
       - zookeeper
     volumes:
       - ./producers:/usr/src/app
+      - /workspaces/Ayudantia-2023-2S/Ayu2/db:/usr/src/app/db  # Add this line to mount the database
 
   producer3:
     build: ./producers
@@ -48,17 +51,20 @@ services:
       - zookeeper
     volumes:
       - ./producers:/usr/src/app
+      - /workspaces/Ayudantia-2023-2S/Ayu2/db:/usr/src/app/db  # Add this line to mount the database
 
   consumer:
     build: ./consumers
     container_name: consumer_kafka
-    #deploy: 
-    #  replicas: 5
     depends_on:
       - kafka
       - zookeeper
       - producer
     volumes:
       - ./consumers:/usr/src/app
+      - /workspaces/Ayudantia-2023-2S/Ayu2/db:/usr/src/app/db  # Add this line to mount the database
 
+
+
+  
     
